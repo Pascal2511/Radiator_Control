@@ -10,5 +10,11 @@ sudo pip3 install adafruit-circuitpython-dht
 sudo apt-get install libgpiod2
 sudo apt-get install python3-pip
 chmod +x DHT_22.py
-echo "Installation complete! Thanks for waiting"
-sudo python DHT_22.py
+echo "Creating a linux daemon!"
+sudo cp radiator.service /etc/systemd/system/
+sudo cp DHT_22.py /opt/
+echo "Enable the linux daemon by typing:"
+echo "sudo systemctl enable radiator.service"
+echo "Check the status by typing:"
+echo "sudo systemctl status radiator.service"
+echo "Thanks for waiting"
