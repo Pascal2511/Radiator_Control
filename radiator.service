@@ -1,0 +1,13 @@
+[Unit]
+Description=Automatic radiator program
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/radiator.py
+Restart=always
+User=pi      
+Group=pi
+Environment=PATH=/usr/bin:/usr/local/bin
+WorkingDirectory=/opt/
+
+[Install]
+WantedBy=multi-user.target
