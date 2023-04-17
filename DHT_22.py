@@ -3,6 +3,7 @@ import board
 import adafruit_dht
 import RPi.GPIO as GPIO
 dhtDevice = adafruit_dht.DHT11(board.D4)
+#dhtDevice = adafruit_dht.DHT22(board.D4)
 
 min_temp = 10
 max_temp = 25
