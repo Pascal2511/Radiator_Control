@@ -2,7 +2,7 @@
 Description=Automatic radiator program
 
 [Service]
-ExecStart=/usr/bin/python3 /opt/radiator.py
+ExecStart=/usr/bin/python3 /opt/DHT_22.py
 Restart=always
 User=pi      
 Group=pi
