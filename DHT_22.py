@@ -46,11 +46,7 @@ while True:
             else:
                 print("Perfect Temperature")
         print(GPIO.input(heater))
-        print(
-            "Temp: {:.1f} C    Humidity: {}% ".format(
-                temperature_c, humidity
-            )
-        )
+        print("Temp: {:.1f} C    Humidity: {}% ".format(temperature_c, humidity)
 
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
