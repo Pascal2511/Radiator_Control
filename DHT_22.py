@@ -2,20 +2,34 @@ import time
 import board
 import adafruit_dht
 import RPi.GPIO as GPIO
+dhtDevice = adafruit_dht.DHT11(board.D4)
 
-# Initial the dht device, with data pin connected to:
-# dhtDevice = adafruit_dht.DHT22(board.D4)
-
-# you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
-# This may be necessary on a Linux single board computer like the Raspberry Pi,
-# but it will not work in CircuitPython.
-# change to adafruit_dht.DHT22 if used
-dhtDevice = adafruit_dht.DHT22(board.D4, use_pulseio=False)
-
-min_temp = 15
-max_temp = 20
+min_temp = 10
+max_temp = 25
 heater   = 17
+delay    = 0.5
 
+GPIO.cleanup()
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(heater, GPIO.OUT)
+
+GPIO.output(heater, True)
+time.sleep(1)
+GPIO.output(heater, False)
+
+GPIO.cleanup()
+pi@raspberrypi:~/Temp-Control $ cat DHT_22.py
+import time
+import board
+import adafruit_dht
+import RPi.GPIO as GPIO
+
+dhtDevice = adafruit_dht.DHT11(board.D4)
+
+min_temp = 10
+max_temp = 25
+heater   = 17
+delay    = 0.5
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(heater, GPIO.OUT)
@@ -27,9 +41,11 @@ while True:
         if temperature_c is not None:
             if temperature_c <= min_temp:
                 GPIO.output(heater, GPIO.HIGH)
-            elif temperature_c > max_temp:
+            elif temperature_c >= max_temp:
                 GPIO.output(heater, GPIO.LOW)
-
+            else:
+                print("Perfect Temperature")
+        print(GPIO.input(heater))
         print(
             "Temp: {:.1f} C    Humidity: {}% ".format(
                 temperature_c, humidity
@@ -44,5 +60,5 @@ while True:
     except Exception as error:
         dhtDevice.exit()
         raise error
-        
-    time.sleep(2)
+
+    time.sleep(delay)
