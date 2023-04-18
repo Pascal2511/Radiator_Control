@@ -14,7 +14,8 @@ echo "Creating a linux daemon!"
 sudo cp radiator.service /etc/systemd/system/
 sudo cp DHT_22.py /opt/
 echo "Enable the linux daemon by typing:"
-echo "sudo systemctl enable radiator.service"
-echo "Check the status by typing:"
-echo "sudo systemctl status radiator.service"
+sudo systemctl daemon-reload
+sudo systemctl enable radiator.service
+echo "Checking the status of the service:"
+sudo systemctl status radiator.service
 echo "Thanks for waiting"
